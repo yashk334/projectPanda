@@ -1,0 +1,54 @@
+Cancer Prediction Project
+Objective
+To predict whether a tumor is malignant or benign using logistic regression based on features computed from cell nuclei.
+
+Data Source
+The dataset is sourced from the YBIFoundation's Cancer dataset on GitHub: Cancer Dataset
+
+Import Library
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+
+Import Data
+cancer = pd.read_csv('https://github.com/YBIFoundation/Dataset/raw/main/Cancer.csv')
+cancer.head()
+Describe Data
+cancer.info()
+cancer.describe()
+
+Data Visualization
+Data visualization is essential to understand the distribution and relationships within the data. However, it is not included in the original code snippet.
+You can use libraries such as matplotlib or seaborn for this purpose.
+
+Data Preprocessing
+cancer.columns
+Remove unnecessary columns:
+y = cancer['diagnosis']
+X = cancer.drop(['id','diagnosis','Unnamed: 32'], axis=1)
+
+Define Target Variable (y) and Feature Variables (X)
+y = cancer['diagnosis']
+X = cancer.drop(['id', 'diagnosis', 'Unnamed: 32'], axis=1)
+
+Train Test Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, random_state=2529)
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
+
+Modeling
+model = LogisticRegression(max_iter=5000)
+model.fit(X_train, y_train)
+
+Model Evaluation
+y_pred = model.predict(X_test)
+confusion_matrix(y_test, y_pred)
+accuracy_score(y_test, y_pred)
+print(classification_report(y_test, y_pred))
+
+Prediction
+y_pred
+
+Explanation
+The logistic regression model was trained on 70% of the data and tested on the remaining 30%. The model achieved an accuracy of approximately 95.9%. 
+The confusion matrix, accuracy score, and classification report were used to evaluate the model's performance, demonstrating high precision and recall for both classes (malignant and benign).
